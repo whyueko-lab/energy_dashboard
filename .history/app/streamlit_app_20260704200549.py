@@ -56,14 +56,14 @@ MODEL_PATH = os.path.join(
 )
 
 
-if not os.path.exists(MODEL_PATH):
+if not os.path.exists('/app/energy_model.pkl'):
     st.error(
         "File energy_model.pkl tidak ditemukan. "
         "Silakan training ulang model."
     )
     st.stop()
 
-model = joblib.load(MODEL_PATH)
+model = load_model()
 
 # =========================
 # HEADER

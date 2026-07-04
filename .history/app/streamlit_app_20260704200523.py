@@ -45,25 +45,19 @@ sample_df = df.sample(
 # =========================
 # LOAD MODEL
 # =========================
-BASE_DIR = os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__))
-)
-
-MODEL_PATH = os.path.join(
-    BASE_DIR,
-    "model",
-    "energy_model.pkl"
-)
+@st.cache_resource
+def load_model():
+    return joblib.load('/app/energy_model.pkl')
 
 
-if not os.path.exists(MODEL_PATH):
+if not os.path.exists('/app/energy_model.pkl'):
     st.error(
         "File energy_model.pkl tidak ditemukan. "
         "Silakan training ulang model."
     )
     st.stop()
 
-model = joblib.load(MODEL_PATH)
+model = load_model()
 
 # =========================
 # HEADER

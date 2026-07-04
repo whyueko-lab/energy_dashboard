@@ -63,7 +63,7 @@ if not os.path.exists(MODEL_PATH):
     )
     st.stop()
 
-model = joblib.load(MODEL_PATH)
+model = load_model()
 
 # =========================
 # HEADER

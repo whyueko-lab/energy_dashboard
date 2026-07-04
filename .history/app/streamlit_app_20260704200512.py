@@ -24,17 +24,24 @@ st.set_page_config(
 # =========================
 # LOAD DATA
 # =========================
-BASE_DIR = os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__))
-)
+@st.cache_data
+def load_data():
+    df = pd.read_csv('/app/household_energy_consumption.csv')
 
-CSV_PATH = os.path.join(
-    BASE_DIR,
-    "data",
-    "household_energy_consumption.csv"
-)
+    # Data Cleaning
+    df = df.dropna()
+    df = df.drop_duplicates()
 
-df = pd.read_csv(CSV_PATH)
+    # Konversi kategori
+    df['Has_AC'] = df['Has_AC'].map({
+        'Yes': 1,
+        'No': 0
+    })
+
+    return df
+
+
+df = load_data()
 
 # Sampling aman
 sample_df = df.sample(
@@ -45,25 +52,19 @@ sample_df = df.sample(
 # =========================
 # LOAD MODEL
 # =========================
-BASE_DIR = os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__))
-)
-
-MODEL_PATH = os.path.join(
-    BASE_DIR,
-    "model",
-    "energy_model.pkl"
-)
+@st.cache_resource
+def load_model():
+    return joblib.load('/app/energy_model.pkl')
 
 
-if not os.path.exists(MODEL_PATH):
+if not os.path.exists('/app/energy_model.pkl'):
     st.error(
         "File energy_model.pkl tidak ditemukan. "
         "Silakan training ulang model."
     )
     st.stop()
 
-model = joblib.load(MODEL_PATH)
+model = load_model()
 
 # =========================
 # HEADER
