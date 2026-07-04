@@ -420,15 +420,13 @@ with tab5:
 
     # ===== EVALUASI MODEL =====
     st.subheader("Evaluasi Model")
-    
-    from sklearn.model_selection import train_test_split
-    
+
     df['Has_AC'] = (
-    df['Has_AC']
-    .replace({
-        'Yes': 1,
-        'No': 0
-    })
+        df['Has_AC']
+        .replace({
+            'Yes': 1,
+            'No': 0
+        })
     )
 
     X_full = df[
@@ -455,7 +453,7 @@ with tab5:
         X_full,
         y_full,
         test_size=0.2,
-        random_state=42 
+        random_state=42
     )
     
     y_pred = model.predict(X_test)

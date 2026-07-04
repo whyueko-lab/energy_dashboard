@@ -429,27 +429,27 @@ with tab5:
         'Yes': 1,
         'No': 0
     })
-    )
+)
 
-    X_full = df[
-        [
-            'Household_Size',
-            'Avg_Temperature_C',
-            'Has_AC'
-        ]
+X_full = df[
+    [
+        'Household_Size',
+        'Avg_Temperature_C',
+        'Has_AC'
     ]
+]
 
-    X_full = X_full.apply(
-        pd.to_numeric,
-        errors='coerce'
-    )
+X_full = X_full.apply(
+    pd.to_numeric,
+    errors='coerce'
+)
 
-    X_full = X_full.dropna()
+X_full = X_full.dropna()
 
-    y_full = df.loc[
-        X_full.index,
-        'Energy_Consumption_kWh'
-    ]
+y_full = df.loc[
+    X_full.index,
+    'Energy_Consumption_kWh'
+]
     
     X_train, X_test, y_train, y_test = train_test_split(
         X_full,

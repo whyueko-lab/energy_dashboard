@@ -423,14 +423,7 @@ with tab5:
     
     from sklearn.model_selection import train_test_split
     
-    df['Has_AC'] = (
-    df['Has_AC']
-    .replace({
-        'Yes': 1,
-        'No': 0
-    })
-    )
-
+    # ✅ HANYA 3 FITUR!
     X_full = df[
         [
             'Household_Size',
@@ -438,24 +431,14 @@ with tab5:
             'Has_AC'
         ]
     ]
-
-    X_full = X_full.apply(
-        pd.to_numeric,
-        errors='coerce'
-    )
-
-    X_full = X_full.dropna()
-
-    y_full = df.loc[
-        X_full.index,
-        'Energy_Consumption_kWh'
-    ]
+    
+    y_full = df['Energy_Consumption_kWh']
     
     X_train, X_test, y_train, y_test = train_test_split(
         X_full,
         y_full,
         test_size=0.2,
-        random_state=42 
+        random_state=42
     )
     
     y_pred = model.predict(X_test)
