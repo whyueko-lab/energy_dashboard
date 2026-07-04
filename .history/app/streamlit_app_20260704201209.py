@@ -161,7 +161,7 @@ with tab3:
 
     # ✅ HAPUS Peak_Hours_Usage_kWh dari korelasi
     cols_for_corr = ['Household_Size', 'Avg_Temperature_C', 'Has_AC', 'Energy_Consumption_kWh']
-    corr = (
+        corr = (
         sample_df[cols_for_corr]
         .replace({'Has_AC': {'Yes': 1, 'No': 0}})
         .apply(pd.to_numeric, errors='coerce')
