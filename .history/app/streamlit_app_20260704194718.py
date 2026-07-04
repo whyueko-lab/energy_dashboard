@@ -57,7 +57,7 @@ def load_model():
     return joblib.load('/model/energy_model.pkl')
 
 
-if not os.path.exists('/model/energy_model.pkl'):
+if not os.path.exists('../model/energy_model.pkl'):
     st.error(
         "File energy_model.pkl tidak ditemukan. "
         "Silakan training ulang model."

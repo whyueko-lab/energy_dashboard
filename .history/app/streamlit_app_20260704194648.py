@@ -26,7 +26,7 @@ st.set_page_config(
 # =========================
 @st.cache_data
 def load_data():
-    df = pd.read_csv('data/household_energy_consumption.csv')
+    df = pd.read_csv('data')
 
     # Data Cleaning
     df = df.dropna()
@@ -54,10 +54,10 @@ sample_df = df.sample(
 # =========================
 @st.cache_resource
 def load_model():
-    return joblib.load('/model/energy_model.pkl')
+    return joblib.load('../model/energy_model.pkl')
 
 
-if not os.path.exists('/model/energy_model.pkl'):
+if not os.path.exists('../model/energy_model.pkl'):
     st.error(
         "File energy_model.pkl tidak ditemukan. "
         "Silakan training ulang model."
