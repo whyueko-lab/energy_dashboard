@@ -108,7 +108,7 @@ with tab1:
         st.metric("Jumlah Fitur", len(sample_df.columns) - 2)  # Exclude Household_ID dan Date
     
     with col_info3:
-        ac_count = (sample_df['Has_AC'] == 'Yes').sum()
+        ac_count = (sample_df['Has_AC'] == 1).sum()
         st.metric("Rumah dengan AC", f"{ac_count:,}")
 
     st.markdown("""
@@ -161,17 +161,11 @@ with tab3:
 
     # ✅ HAPUS Peak_Hours_Usage_kWh dari korelasi
     cols_for_corr = ['Household_Size', 'Avg_Temperature_C', 'Has_AC', 'Energy_Consumption_kWh']
-    corr_df = sample_df[cols_for_corr].copy()
-
-    corr_df["Has_AC"] = corr_df["Has_AC"].map({
-        "Yes": 1,
-        "No": 0
-    })
-
     corr = (
-        corr_df
-        .apply(pd.to_numeric, errors="coerce")
-        .corr()
+        sample_df[cols_for_corr]
+        .replace({'Has_AC': {'Yes': 1, 'No': 0}})
+        .apply(pd.to_numeric, errors='coerce')
+        .corr(numeric_only=True)
     )
 
     fig, ax = plt.subplots(figsize=(6, 5))
@@ -429,7 +423,9 @@ with tab5:
     
     from sklearn.model_selection import train_test_split
     
-    df['Has_AC'] = df['Has_AC'].map({'Yes': 1, 'No': 0})
+    df['Has_AC'] = df['Has_AC'].replace({'Yes': 1, 'No': 0}
+                    
+    
 
     X_full = df[
         [

@@ -161,18 +161,18 @@ with tab3:
 
     # ✅ HAPUS Peak_Hours_Usage_kWh dari korelasi
     cols_for_corr = ['Household_Size', 'Avg_Temperature_C', 'Has_AC', 'Energy_Consumption_kWh']
-    corr_df = sample_df[cols_for_corr].copy()
+    ccorr_df = sample_df[cols_for_corr].copy()
 
-    corr_df["Has_AC"] = corr_df["Has_AC"].map({
-        "Yes": 1,
-        "No": 0
-    })
+corr_df["Has_AC"] = corr_df["Has_AC"].map({
+    "Yes": 1,
+    "No": 0
+})
 
-    corr = (
-        corr_df
-        .apply(pd.to_numeric, errors="coerce")
-        .corr()
-    )
+corr = (
+    corr_df
+    .apply(pd.to_numeric, errors="coerce")
+    .corr()
+)
 
     fig, ax = plt.subplots(figsize=(6, 5))
 
