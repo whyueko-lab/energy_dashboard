@@ -99,7 +99,7 @@ with tab1:
     st.dataframe(sample_df.head(50))
 
     # ✅ INFO STATS
-    col_info1, col_info2, col_info3, col_info4 = st.columns(4)
+    col_info1, col_info2, col_info3 = st.columns(3)
     
     with col_info1:
         st.metric("Total Data", f"{len(sample_df):,}")
@@ -112,8 +112,8 @@ with tab1:
         st.metric("Rumah dengan AC", f"{ac_count:,}")
     
     with col_info4:
-        no_ac_count = (sample_df['Has_AC'] == 'No').sum()
-        st.metric("Rumah tanpa AC", f"{no_ac_count:,}")
+        ac_count = (sample_df['Has_AC'] == 'No').sum()
+        st.metric("Rumah dengan AC", f"{ac_count:,}")
         
     st.markdown("""
         ### Penjelasan Dataset

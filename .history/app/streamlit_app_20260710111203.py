@@ -99,7 +99,7 @@ with tab1:
     st.dataframe(sample_df.head(50))
 
     # ✅ INFO STATS
-    col_info1, col_info2, col_info3, col_info4 = st.columns(4)
+    col_info1, col_info2, col_info3, col = st.columns(3)
     
     with col_info1:
         st.metric("Total Data", f"{len(sample_df):,}")
